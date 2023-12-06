@@ -33,7 +33,7 @@ remainder_get (int a, int b, int* q)
         return b;
     else
     {
-        *q = *q+1;
+        if (q!=NULL) *q = *q+1;
         return remainder_get(a, b-a, q);
     }
 }
@@ -115,6 +115,19 @@ void gcd_coeff_rec(GCD_coeff *coeff, GCD_coeff *prev_coeff)
     mult_gcd_coeff(-q, coeff);
     add_gcd_coeff(coeff, &temp_prev_coeff);
     gcd_coeff_rec(coeff, prev_coeff);
+}
+
+
+int
+inverse_modulo(int a, int b)
+{
+    // get the representation of a modulo b
+    a = remainder_get(b, a, (int *)NULL);
+    GCD_coeff coeff;
+    gcd_coeff(a, b, &coeff);
+    if (evaluate_gcd_coeff(&coeff)!=1)
+        return 0;
+    return coeff.c_a;
 }
 
 
