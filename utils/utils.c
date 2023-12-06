@@ -120,6 +120,10 @@ void gcd_coeff_rec(GCD_coeff *coeff, GCD_coeff *prev_coeff)
 
 int
 inverse_modulo(int a, int b)
+/**
+ * Finds inverse of a modulo b
+ * Returns 0 if inverse does not exist
+ */
 {
     // get the representation of a modulo b
     a = remainder_get(b, a, (int *)NULL);
