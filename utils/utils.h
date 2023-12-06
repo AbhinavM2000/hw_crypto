@@ -17,6 +17,8 @@ int divisible (int a, int b);
 /*-------GCD related funcs----*/
 int gcd (int a, int b);
 
+int inverse_modulo (int a, int b);
+
 struct gcd_coeff
 /** Structure that stores
  *      axc_a + bxc_b
