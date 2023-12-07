@@ -135,6 +135,28 @@ inverse_modulo(int a, int b)
 }
 
 
+int
+pow_modulo(int p, int a, int b)
+/**
+ * Computes a^p mod b in the representation
+ * that lies between 0 and b-1
+ **/
+{
+    if (p==0) return 1;
+    int q=0;
+    int rem = remainder_get(2, p, &q);
+    int ans = pow_modulo(q, a, b);
+    ans *= ans;
+    ans = remainder_get(b, ans, NULL);
+    if (rem)
+    {
+        ans *=a;
+        ans = remainder_get(b, ans, NULL);
+    }
+    return ans;
+}
+
+
 void
 print_gcd_coeff(GCD_coeff *coeff)
 /** Function to print the gcd_coeff representation. */

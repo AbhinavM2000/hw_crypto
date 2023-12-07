@@ -13,6 +13,8 @@ int remainder_get (int , int , int *);
 
 int divisible (int a, int b);
 
+int pow_modulo (int p, int a, int b);
+
 
 /*-------GCD related funcs----*/
 int gcd (int a, int b);
