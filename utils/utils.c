@@ -22,6 +22,11 @@ remainder_get (int a, int b, int* q)
  * point to quotient + initial value of *q
  */
 {
+    if (a<0 || b<0)
+    {
+        fprintf(stderr, "one of the arguments for remainder_get is negative!!\n");
+        exit(1);
+    }
     if (a==0)
     {
         fprintf(stderr, "division by zero encountered!\n");
@@ -43,11 +48,27 @@ int
 divisible (int a, int b)
 /** Check if b is divisible by a*/
 {
+    if (a<0 || b<0) 
+    {
+        fprintf(stderr, "one of the arguments of divisible is negative!!\n");
+        exit(1);
+    }
     int q = 0;
     return remainder_get(a,b, &q)==0 ? 1 : 0;
 }
 
 
+int
+std_rep(int a, int b)
+/**
+ * Get the representation of a modulo b
+ * that lies in the range 0,..,b-1.
+ */
+{
+    if (a>=0) return remainder_get(b, a, NULL);
+    else if (divisible(b, -a)) return 0;
+    return b-remainder_get(b, -a, NULL);
+}
 
 int
 gcd(int a, int b)
@@ -131,7 +152,7 @@ inverse_modulo(int a, int b)
     gcd_coeff(a, b, &coeff);
     if (evaluate_gcd_coeff(&coeff)!=1)
         return 0;
-    return coeff.c_a;
+    return std_rep(coeff.c_a, b);
 }
 
 
